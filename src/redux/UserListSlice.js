@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   usersListData: [],
   isLoading: true,
+  query: "",
 };
 const usersListSlice = createSlice({
   name: "usersList",
@@ -20,7 +21,9 @@ const usersListSlice = createSlice({
 export const userListThunk = () => {
   return async (dispatch) => {
     const fetchingData = async () => {
-      const response = await fetch("https://dummyjson.com/users");
+      const response = await fetch(
+        "https://dummyjson.com/users?limit=8&skip=0"
+      );
       if (!response.ok) {
         throw new Error("Fetching User List Went WRONG");
       }

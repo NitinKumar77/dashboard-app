@@ -19,7 +19,6 @@ function SideBar() {
       sx={{
         width: "350px",
         background: "#FFFFFF",
-        border: " 2px solid",
       }}
     >
       <Box position={"fixed"}>

@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { userListThunk } from "../redux/UserListSlice";
+import Pagination from "./Pagination";
 import LoadingBar from "./UI/LoadingBar";
 import BasicTable from "./UI/TableList";
 
@@ -15,6 +16,7 @@ function UserListTable() {
     <>
       {isLoading && <LoadingBar />}
       {!isLoading && <BasicTable />}
+      <Pagination />
     </>
   );
 }
