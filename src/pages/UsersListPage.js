@@ -1,9 +1,8 @@
-import React from 'react'
+import React from "react";
+import UserListTable from "../components/UserListTable";
 
 function UsersListPage() {
-  return (
-    <div>UsersListPage</div>
-  )
+  return <UserListTable />;
 }
 
-export default UsersListPage
+export default UsersListPage;

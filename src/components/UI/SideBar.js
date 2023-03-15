@@ -37,7 +37,7 @@ function SideBar() {
 
                   fontStyle: "normal",
                   fontWeight: "700",
-                  fontSize: "32px",
+                  fontSize: "30px",
                   lineHeight: "39px",
                   /* identical to box height */
                   color: "#61FF48",
@@ -59,7 +59,7 @@ function SideBar() {
 
                   fontStyle: "normal",
                   fontWeight: "400",
-                  fontSize: "32px",
+                  fontSize: "28px",
                   lineHeight: "39px",
                   color: "#777575",
                 }}
