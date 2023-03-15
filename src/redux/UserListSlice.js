@@ -8,6 +8,7 @@ const usersListSlice = createSlice({
   initialState,
   reducers: {
     setUserListData(state, action) {
+      console.log(action.payload);
       state.usersListData = action.payload;
     },
     setUserDataIsLoading(state, action) {
@@ -28,8 +29,8 @@ export const userListThunk = () => {
     };
     try {
       const data = await fetchingData();
-      console.log("userListslice");
-      dispatch(setUserDataIsLoading(data));
+
+      dispatch(setUserListData(data.users));
     } catch (error) {
       console.log(error.message);
     }

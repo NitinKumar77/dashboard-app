@@ -6,7 +6,7 @@ import SearchBar from "./SearchBar";
 function Rightbar() {
   return (
     <Box flex={3} p={2} sx={{ border: "2px solid" }}>
-      <Box display={"flex"} justifyContent='space-evenly' alignItems='center'>
+      <Box display={"flex"} justifyContent='space-between' alignItems='center'>
         <Typography
           fonstsize='large'
           sx={{
