@@ -7,6 +7,7 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { styled } from "@mui/material";
+import { useSelector } from "react-redux";
 
 function createData(name, calories, fat, carbs, protein) {
   return { name, calories, fat, carbs, protein };
@@ -20,15 +21,16 @@ const rows = [
   createData("Gingerbread", 356, 16.0, 49, 3.9),
 ];
 
+const MyTableCell = styled(TableCell)({
+  backgroundColor: "#61FF48",
+  borderLeft: "2px solid #f3f3f3",
+});
+const BorderedTableCell = styled(TableCell)({
+  borderLeft: "2px solid #f3f3f3",
+});
 export default function BasicTable() {
-  const MyTableCell = styled(TableCell)({
-    backgroundColor: "#61FF48",
-    borderLeft: "2px solid #f3f3f3",
-  });
-  const BorderedTableCell = styled(TableCell)({
-    borderLeft: "2px solid #f3f3f3",
-  });
-
+  const rowsData = useSelector((state) => state.userList);
+  console.log(rowsData);
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} aria-label='simple table'>
