@@ -18,7 +18,6 @@ function SideBar() {
       p={2}
       sx={{
         width: "350px",
-        height: "1080px",
         background: "#FFFFFF",
         border: " 2px solid",
       }}
