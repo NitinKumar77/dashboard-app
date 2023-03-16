@@ -2,6 +2,7 @@ import React, { lazy, Suspense } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import Dashboard from "./components/UI/Dashboard";
+import LoadingBar from "./components/UI/LoadingBar";
 import { tokenLoader } from "./util/Auth";
 
 const UsersListPage = lazy(() => import("./pages/UsersListPage"));
@@ -9,13 +10,14 @@ const ProductListPage = lazy(() => import("./pages/ProductListPage"));
 const router = createBrowserRouter([
   {
     path: "/",
+    id: "root",
     element: <Dashboard />,
     loader: tokenLoader,
     children: [
       {
         index: true,
         element: (
-          <Suspense>
+          <Suspense fallback={<LoadingBar />}>
             <UsersListPage />
           </Suspense>
         ),
@@ -23,7 +25,7 @@ const router = createBrowserRouter([
       {
         path: "/products",
         element: (
-          <Suspense>
+          <Suspense fallback={<LoadingBar />}>
             <ProductListPage />
           </Suspense>
         ),

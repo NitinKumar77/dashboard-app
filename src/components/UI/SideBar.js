@@ -12,6 +12,7 @@ import ViewInArTwoToneIcon from "@mui/icons-material/ViewInArTwoTone";
 import React from "react";
 import { setLoggedIn } from "../../redux/LoginSlice";
 import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 
 function SideBar() {
   const dispatch = useDispatch();
@@ -27,7 +28,7 @@ function SideBar() {
       <Box position={"fixed"}>
         <List>
           <ListItem disablePadding>
-            <ListItemButton component='a'>
+            <ListItemButton component={Link} to='/'>
               <ListItemIcon>
                 <AccountCircleIcon fontSize='large' sx={{ color: "#61FF48" }} />
               </ListItemIcon>
@@ -49,7 +50,7 @@ function SideBar() {
             </ListItemButton>
           </ListItem>
           <ListItem disablePadding>
-            <ListItemButton component='a'>
+            <ListItemButton component={Link} to='/products'>
               <ListItemIcon>
                 <ViewInArTwoToneIcon fontSize='large' />
               </ListItemIcon>

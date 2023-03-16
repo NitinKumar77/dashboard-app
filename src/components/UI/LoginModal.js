@@ -11,8 +11,7 @@ import Typography from "@mui/joy/Typography";
 import { useDispatch, useSelector } from "react-redux";
 import { loginThunk } from "../../redux/LoginSlice";
 import { Alert } from "@mui/joy";
-
-export default function LoginModal({ open, setOpen }) {
+function LoginModal({ open, setOpen }) {
   const [loginDetails, setLoginDetails] = React.useState({
     username: "",
     password: "",
@@ -115,3 +114,5 @@ export default function LoginModal({ open, setOpen }) {
     </>
   );
 }
+
+export default React.memo(LoginModal);
