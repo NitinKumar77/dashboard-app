@@ -3,6 +3,7 @@ const initialState = {
   loginDetail: { username: "", password: "" },
   isLoggedIn: false,
   error: "",
+  token: "",
 };
 const loginSlice = createSlice({
   name: "login",
@@ -17,6 +18,9 @@ const loginSlice = createSlice({
     },
     setLoginError(state, action) {
       state.error = action.payload;
+    },
+    setToken(state, action) {
+      state.token = action.payload;
     },
   },
 });
@@ -43,14 +47,17 @@ export const loginThunk = (loginDetail) => {
     };
     try {
       const data = await authLoginDetails();
+      const token = data.token;
+      localStorage.setItem("token", token);
+      console.log(token);
       dispatch(setLoggedIn(true));
-      console.log("token ", data);
+      dispatch(setToken(token));
     } catch (error) {
       dispatch(setLoginError(error.message));
     }
   };
 };
 
-export const { setLoginError, setLoggedIn, setLoginDetails } =
+export const { setToken, setLoginError, setLoggedIn, setLoginDetails } =
   loginSlice.actions;
 export default loginSlice.reducer;

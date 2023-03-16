@@ -10,8 +10,11 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import LogoutIcon from "@mui/icons-material/Logout";
 import ViewInArTwoToneIcon from "@mui/icons-material/ViewInArTwoTone";
 import React from "react";
+import { setLoggedIn } from "../../redux/LoginSlice";
+import { useDispatch } from "react-redux";
 
 function SideBar() {
+  const dispatch = useDispatch();
   return (
     <Box
       flex={1}
@@ -67,7 +70,12 @@ function SideBar() {
             </ListItemButton>
           </ListItem>
           <ListItem disablePadding sx={{ marginTop: "500px" }}>
-            <ListItemButton>
+            <ListItemButton
+              onClick={() => {
+                localStorage.removeItem("token");
+                dispatch(setLoggedIn(false));
+              }}
+            >
               <ListItemIcon>
                 <LogoutIcon fontSize='large' />
               </ListItemIcon>
