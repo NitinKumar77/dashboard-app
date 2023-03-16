@@ -7,18 +7,18 @@ import Rightbar from "./Rightbar";
 import SideBar from "./SideBar";
 
 function Dashboard() {
+
   const isLoggedIn = useSelector((state) => state.login.isLoggedIn);
   return (
     <>
-      {!isLoggedIn && <Login />}
-      {isLoggedIn && (
-        <Box>
-          <Stack direction='row' spacing={2} justifyContent='space-between'>
-            <SideBar />
-            <Rightbar />
-          </Stack>
-        </Box>
-      )}
+    {!isLoggedIn && <Login  />}
+
+      <Box>
+        <Stack direction='row' spacing={2} justifyContent='space-between'>
+          <SideBar />
+          <Rightbar />
+        </Stack>
+      </Box>
     </>
   );
 }
