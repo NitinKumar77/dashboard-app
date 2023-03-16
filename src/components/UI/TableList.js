@@ -20,16 +20,16 @@ export default function BasicTable() {
   const rowsData = useSelector((state) => state.userList.usersListData);
   const query = useSelector((state) => state.userList.query);
   const filteredData = rowsData.filter((user) => {
-    const name = user.firstName + user.lastName;
-    const email = user.email;
-    const phone = user.phone;
-    console.log(phone);
+    const { firstName, lastName, email, phone } = user;
+    const name = firstName + lastName;
+    const queryLowerCase = query.toLowerCase().trim();
     return (
-      name.toLowerCase().includes(query.toLowerCase().trim()) ||
-      email.toLowerCase().includes(query.toLowerCase().trim()) ||
-      phone.toLowerCase().includes(query.toLowerCase().trim())
+      name.toLowerCase().includes(queryLowerCase) ||
+      email.toLowerCase().includes(queryLowerCase) ||
+      phone.toLowerCase().includes(queryLowerCase)
     );
   });
+
   const shownData = query.trim().length ? filteredData : rowsData;
   return (
     <TableContainer component={Paper}>
