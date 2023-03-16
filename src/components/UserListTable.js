@@ -6,10 +6,11 @@ import LoadingBar from "./UI/LoadingBar";
 import BasicTable from "./UI/TableList";
 
 function UserListTable() {
+  const next8elements = useSelector((state) => state.userList.next8elements);
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(userListThunk());
-  }, [dispatch]);
+    dispatch(userListThunk(next8elements));
+  }, [dispatch, next8elements]);
 
   const isLoading = useSelector((state) => state.userList.isLoading);
   return (

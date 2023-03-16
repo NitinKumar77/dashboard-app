@@ -18,7 +18,19 @@ const BorderedTableCell = styled(TableCell)({
 });
 export default function BasicTable() {
   const rowsData = useSelector((state) => state.userList.usersListData);
-  console.log(rowsData);
+  const query = useSelector((state) => state.userList.query);
+  const filteredData = rowsData.filter((user) => {
+    const name = user.firstName + user.lastName;
+    const email = user.email;
+    const phone = user.phone;
+    console.log(phone);
+    return (
+      name.toLowerCase().includes(query.toLowerCase().trim()) ||
+      email.toLowerCase().includes(query.toLowerCase().trim()) ||
+      phone.toLowerCase().includes(query.toLowerCase().trim())
+    );
+  });
+  const shownData = query.trim().length ? filteredData : rowsData;
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} aria-label='simple table'>
@@ -34,7 +46,7 @@ export default function BasicTable() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {rowsData.map((user) => (
+          {shownData.map((user) => (
             <TableRow key={user.id}>
               <BorderedTableCell component='th' scope='row'>
                 {user.id}

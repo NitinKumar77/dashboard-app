@@ -2,8 +2,16 @@ import * as React from "react";
 
 import Box from "@mui/material/Box";
 import InputBase from "@mui/material/InputBase";
+import { useDispatch, useSelector } from "react-redux";
+import { setUsersQuery } from "../../redux/UserListSlice";
 
 export default function SearchBar() {
+  const searchUserQuery = useSelector((state) => state.userList.query);
+  const dipatch = useDispatch();
+  const onChangeHandler = ({ target: { value } }) => {
+    dipatch(setUsersQuery(value));
+  };
+  console.log(searchUserQuery);
   return (
     <Box
       sx={{
@@ -26,7 +34,7 @@ export default function SearchBar() {
         <InputBase
           placeholder='Search…'
           inputProps={{ "aria-label": "search" }}
-          onChange={() => {}}
+          onChange={onChangeHandler}
         />
       </Box>
     </Box>

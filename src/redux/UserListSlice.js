@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   usersListData: [],
   isLoading: true,
+  next8elements: 0,
   query: "",
 };
 const usersListSlice = createSlice({
@@ -9,20 +10,27 @@ const usersListSlice = createSlice({
   initialState,
   reducers: {
     setUserListData(state, action) {
-      console.log(action.payload);
       state.usersListData = action.payload;
     },
     setUserDataIsLoading(state, action) {
       state.isLoading = action.payload;
     },
+    setNextElements(state, action) {
+      if (state.next8elements < 73) {
+        state.next8elements = action.payload;
+      }
+    },
+    setUsersQuery(state, action) {
+      state.query = action.payload;
+    },
   },
 });
 
-export const userListThunk = () => {
+export const userListThunk = (value) => {
   return async (dispatch) => {
     const fetchingData = async () => {
       const response = await fetch(
-        "https://dummyjson.com/users?limit=8&skip=0"
+        `https://dummyjson.com/users?limit=8&skip=${value}`
       );
       if (!response.ok) {
         throw new Error("Fetching User List Went WRONG");
@@ -41,5 +49,10 @@ export const userListThunk = () => {
   };
 };
 
-export const { setUserDataIsLoading, setUserListData } = usersListSlice.actions;
+export const {
+  setUsersQuery,
+  setNextElements,
+  setUserDataIsLoading,
+  setUserListData,
+} = usersListSlice.actions;
 export default usersListSlice.reducer;
