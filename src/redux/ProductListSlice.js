@@ -40,8 +40,8 @@ export const productsListThunk = (value) => {
     };
     try {
       const data = await fetchingData();
-      console.log(data);
-      dispatch(setProductsListData(data));
+      console.log(data.products);
+      dispatch(setProductsListData(data.products));
       dispatch(setProductsDataIsLoading(false));
     } catch (error) {
       console.log(error.message);
