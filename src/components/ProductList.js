@@ -6,6 +6,8 @@ import { productsListThunk } from "../redux/ProductListSlice";
 import ProductsBox from "./ProductsBox";
 import LoadingBar from "./UI/LoadingBar";
 import Spinner from "./UI/Spinner";
+import Pagination from "./Pagination";
+
 function ProductList() {
   const dispatch = useDispatch();
   const token = useRouteLoaderData("root");
@@ -22,7 +24,13 @@ function ProductList() {
   }, [dispatch, next8elements, token]);
   return (
     <>
-      {!isLoading && token && <ProductsBox />}
+      {!isLoading && token && (
+        <>
+          {" "}
+          <ProductsBox />
+          <Pagination mode={"products"} />
+        </>
+      )}
       {isLoading && (
         <>
           {" "}

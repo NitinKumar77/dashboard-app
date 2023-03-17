@@ -16,8 +16,12 @@ function UserListTable() {
   return (
     <>
       {isLoading && <LoadingBar />}
-      {!isLoading && <BasicTable />}
-      <Pagination />
+      {!isLoading && (
+        <>
+          {" "}
+          <BasicTable /> <Pagination mode={"users"} />
+        </>
+      )}
     </>
   );
 }

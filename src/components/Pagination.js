@@ -3,12 +3,16 @@ import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
 import { useDispatch } from "react-redux";
 import { setNextElements } from "../redux/UserListSlice";
+import { setNextProductsElements } from "../redux/ProductListSlice";
 
-export default function PaginationList() {
+export default function PaginationList({ mode }) {
   const dispatch = useDispatch();
 
   const onChangeHandler = (e, page) => {
     const next = (page - 1) * 8;
+    if (mode === "products") {
+      dispatch(setNextProductsElements(next));
+    }
     dispatch(setNextElements(next));
   };
   return (

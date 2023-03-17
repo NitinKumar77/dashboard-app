@@ -15,7 +15,7 @@ const productsListSlice = createSlice({
     setProductsDataIsLoading(state, action) {
       state.isLoading = action.payload;
     },
-    setNextElements(state, action) {
+    setNextProductsElements(state, action) {
       if (state.next8Products < 73) {
         state.next8Products = action.payload;
       }
@@ -52,7 +52,7 @@ export const productsListThunk = (value) => {
 export const {
   setProductsDataIsLoading,
   setProductsQuery,
-  setNextElements,
+  setNextProductsElements,
   setProductsListData,
 } = productsListSlice.actions;
 export default productsListSlice.reducer;
