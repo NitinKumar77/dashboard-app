@@ -8,11 +8,21 @@ import { setProductsQuery } from "../../redux/ProductListSlice";
 import { useLocation } from "react-router-dom";
 
 export default function SearchBar() {
-  const [search, setsearch] = React.useState("");
+  const [search, setSearch] = React.useState("");
   const location = useLocation();
-  console.log(location);
+  const { pathname } = location;
   const dipatch = useDispatch();
+  React.useEffect(() => {
+    setSearch("");
+    if (pathname === "/products") {
+      dipatch(setUsersQuery(""));
+      return;
+    }
+    dipatch(setProductsQuery(""));
+  }, [pathname, dipatch]);
+
   const onChangeHandler = ({ target: { value } }) => {
+    setSearch(value);
     if (location.pathname === "/products") {
       dipatch(setProductsQuery(value));
 
@@ -20,7 +30,6 @@ export default function SearchBar() {
     } else if (location.pathname === "/") {
       dipatch(setUsersQuery(value));
     }
-    console.log("search", search);
   };
 
   return (
