@@ -27,7 +27,7 @@ const loginSlice = createSlice({
 
 export const loginThunk = (loginDetail) => {
   console.log("logindetail", loginDetail);
-  return async (dispatch) => {
+  return async (dispatch, getState) => {
     const authLoginDetails = async () => {
       const response = await fetch("https://dummyjson.com/auth/login", {
         method: "POST",

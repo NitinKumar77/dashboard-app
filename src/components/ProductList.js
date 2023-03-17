@@ -1,29 +1,31 @@
-import { Box } from "@mui/joy";
-import React, { useEffect } from "react";
+import React, { useEffect, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useRouteLoaderData } from "react-router-dom";
+
 import { productsListThunk } from "../redux/ProductListSlice";
 import ProductsBox from "./ProductsBox";
 import LoadingBar from "./UI/LoadingBar";
-import Spinner from "./UI/Spinner";
+
 import Pagination from "./Pagination";
 
 function ProductList() {
   const dispatch = useDispatch();
-  const token = useRouteLoaderData("root");
-  const isLoading = useSelector((state) => state.productsList.isLoading);
 
+  const isLoading = useSelector((state) => state.productsList.isLoading);
+  console.log(isLoading);
   const next8elements = useSelector(
     (state) => state.productsList.next8Products
   );
+
+  const memoizedNext8Elements = useMemo(() => next8elements, [next8elements]);
+
   useEffect(() => {
-    if (token) {
-      dispatch(productsListThunk(next8elements));
-    }
-  }, [dispatch, next8elements, token]);
+    console.log("thunkproduct");
+    dispatch(productsListThunk(memoizedNext8Elements));
+  }, [dispatch, memoizedNext8Elements]);
+
   return (
     <>
-      {!isLoading && token && (
+      {!isLoading && (
         <>
           {" "}
           <ProductsBox />
@@ -34,9 +36,6 @@ function ProductList() {
         <>
           {" "}
           <LoadingBar />
-          <Box minHeight={"200px"}>
-            <Spinner />
-          </Box>
         </>
       )}
     </>

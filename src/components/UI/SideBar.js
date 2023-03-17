@@ -10,7 +10,7 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import LogoutIcon from "@mui/icons-material/Logout";
 import ViewInArTwoToneIcon from "@mui/icons-material/ViewInArTwoTone";
 import React from "react";
-import { setLoggedIn, setLoginError } from "../../redux/LoginSlice";
+import { setLoggedIn } from "../../redux/LoginSlice";
 import { useDispatch } from "react-redux";
 import { NavLink, redirect, useLocation } from "react-router-dom";
 
@@ -53,7 +53,7 @@ function SideBar() {
                   fontWeight: "700",
                   fontSize: "30px",
                   lineHeight: "39px",
-                  /* identical to box height */
+
                   color: location.pathname === "/" ? "#61FF48" : undefined,
                 }}
               >
@@ -99,9 +99,7 @@ function SideBar() {
             <ListItemButton
               onClick={() => {
                 localStorage.removeItem("token");
-                dispatch(setLoginError("Logged Out"));
                 dispatch(setLoggedIn(false));
-                redirect("/");
               }}
             >
               <ListItemIcon>
