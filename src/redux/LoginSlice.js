@@ -35,7 +35,6 @@ export const loginThunk = (loginDetail) => {
         body: JSON.stringify({
           username: loginDetail.username,
           password: loginDetail.password,
-          // expiresInMins: 60, // optional
         }),
       });
       if (!response.ok) {
