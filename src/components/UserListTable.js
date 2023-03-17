@@ -30,4 +30,4 @@ function UserListTable() {
   );
 }
 
-export default UserListTable;
+export default React.memo(UserListTable);

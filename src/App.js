@@ -7,7 +7,8 @@ import { tokenLoader } from "./util/Auth";
 
 const UsersListPage = lazy(() => import("./pages/UsersListPage"));
 const ProductListPage = lazy(() => import("./pages/ProductListPage"));
-const router = createBrowserRouter([
+
+const routes = [
   {
     path: "/",
     id: "root",
@@ -32,7 +33,9 @@ const router = createBrowserRouter([
       },
     ],
   },
-]);
+];
+
+const router = createBrowserRouter(routes);
 
 function App() {
   return (

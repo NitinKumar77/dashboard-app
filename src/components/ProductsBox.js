@@ -72,4 +72,4 @@ function ProductsBox() {
   );
 }
 
-export default ProductsBox;
+export default React.memo(ProductsBox);

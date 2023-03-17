@@ -100,6 +100,7 @@ function SideBar() {
               onClick={() => {
                 localStorage.removeItem("token");
                 dispatch(setLoggedIn(false));
+                redirect("/");
               }}
             >
               <ListItemIcon>
