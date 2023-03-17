@@ -16,19 +16,21 @@ const MyTableCell = styled(TableCell)({
 const BorderedTableCell = styled(TableCell)({
   borderLeft: "2px solid #f3f3f3",
 });
-export default function BasicTable() {
+function BasicTable() {
   const rowsData = useSelector((state) => state.userList.usersListData);
   const query = useSelector((state) => state.userList.query);
-  const filteredData = rowsData.filter((user) => {
-    const { firstName, lastName, email, phone } = user;
-    const name = firstName + lastName;
-    const queryLowerCase = query.toLowerCase().trim();
-    return (
-      name.toLowerCase().includes(queryLowerCase) ||
-      email.toLowerCase().includes(queryLowerCase) ||
-      phone.toLowerCase().includes(queryLowerCase)
-    );
-  });
+  const filteredData = React.useMemo(() => {
+    return rowsData.filter((user) => {
+      const { firstName, lastName, email, phone } = user;
+      const name = firstName + lastName;
+      const queryLowerCase = query.toLowerCase().trim();
+      return (
+        name.toLowerCase().includes(queryLowerCase) ||
+        email.toLowerCase().includes(queryLowerCase) ||
+        phone.toLowerCase().includes(queryLowerCase)
+      );
+    });
+  }, [rowsData, query]);
 
   const shownData = query.trim().length ? filteredData : rowsData;
   return (
@@ -69,3 +71,4 @@ export default function BasicTable() {
     </TableContainer>
   );
 }
+export default React.memo(BasicTable);
