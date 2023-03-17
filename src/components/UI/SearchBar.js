@@ -2,16 +2,27 @@ import * as React from "react";
 
 import Box from "@mui/material/Box";
 import InputBase from "@mui/material/InputBase";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { setUsersQuery } from "../../redux/UserListSlice";
+import { setProductsQuery } from "../../redux/ProductListSlice";
+import { useLocation } from "react-router-dom";
 
 export default function SearchBar() {
-  const searchUserQuery = useSelector((state) => state.userList.query);
+  const [search, setsearch] = React.useState("");
+  const location = useLocation();
+  console.log(location);
   const dipatch = useDispatch();
   const onChangeHandler = ({ target: { value } }) => {
-    dipatch(setUsersQuery(value));
+    if (location.pathname === "/products") {
+      dipatch(setProductsQuery(value));
+
+      return;
+    } else if (location.pathname === "/") {
+      dipatch(setUsersQuery(value));
+    }
+    console.log("search", search);
   };
-  console.log(searchUserQuery);
+
   return (
     <Box
       sx={{
@@ -33,6 +44,7 @@ export default function SearchBar() {
       >
         <InputBase
           placeholder='Search…'
+          value={search}
           inputProps={{ "aria-label": "search" }}
           onChange={onChangeHandler}
         />
