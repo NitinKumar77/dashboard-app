@@ -5,16 +5,21 @@ import { Typography, Box } from "@mui/joy";
 import StarIcon from "@mui/icons-material/Star";
 import { useSelector } from "react-redux";
 import CategoryIcon from "@mui/icons-material/Category";
+
 function ProductsBox() {
   const productList = useSelector(
     (state) => state.productsList.productsListData
   );
   const query = useSelector((state) => state.productsList.query);
 
-  const filteredList = productList.filter((product) => {
-    const queryLowerCase = query.toLowerCase().trim();
-    return product.title.toLowerCase().includes(queryLowerCase);
-  });
+  const filteredList = React.useMemo(
+    () =>
+      productList.filter((product) => {
+        const queryLowerCase = query.toLowerCase().trim();
+        return product.title.toLowerCase().includes(queryLowerCase);
+      }),
+    [productList, query]
+  );
 
   const shownList = query.trim().length ? filteredList : productList;
 
@@ -26,21 +31,21 @@ function ProductsBox() {
         rowHeight={"auto"}
         sx={{ backgroundColor: "white", padding: "33px", margin: "auto" }}
       >
-        {shownList.map((item) => (
+        {shownList.map(({ id, title, thumbnail, category, rating, price }) => (
           <ImageListItem
-            key={item.id}
+            key={id}
             rows={10}
             sx={{
               display: "flex",
               backgroundColor: "#f3f3f3",
             }}
           >
-            <img src={item.thumbnail} alt={item.title} loading='lazy' />
+            <img src={thumbnail} alt={title} loading='lazy' />
             <Typography fontSize={18} fontWeight={600} fontFamily='cursive'>
-              {item.title}
+              {title}
             </Typography>
             <Typography fontSize={18} fontWeight={400} fontFamily='sans-serif'>
-              <CategoryIcon /> {item.category}
+              <CategoryIcon /> {category}
             </Typography>
             <div style={{ display: "flex", justifyContent: "space-between" }}>
               <span
@@ -54,15 +59,14 @@ function ProductsBox() {
                   borderRadius: "5px",
                 }}
               >
-                <Typography fontSize={"medium"} sx={{ color: "whitesmoke" }}>
-                  {item.rating}
+                <Typography fontSize='medium' sx={{ color: "whitesmoke" }}>
+                  {rating}
                 </Typography>
                 <StarIcon sx={{ color: "white" }} fontSize='small' />
               </span>
               <Typography fontWeight={800}>
                 {"₹"}
-                {item.price}
-                {"         "}
+                {price}{" "}
               </Typography>
             </div>
           </ImageListItem>
@@ -72,4 +76,4 @@ function ProductsBox() {
   );
 }
 
-export default React.memo(ProductsBox);
+export default ProductsBox;
