@@ -7,6 +7,7 @@ import BasicTable from "./UI/TableList";
 
 function UserListTable() {
   const next8elements = useSelector((state) => state.userList.next8elements);
+  const data = useSelector((state) => state.userList.usersListData);
   const dispatch = useDispatch();
 
   const isLoading = useSelector((state) => state.userList.isLoading);
@@ -14,8 +15,10 @@ function UserListTable() {
   const memoizedNext8elements = useMemo(() => next8elements, [next8elements]);
 
   useEffect(() => {
-    dispatch(userListThunk(memoizedNext8elements));
-  }, [dispatch, memoizedNext8elements]);
+    if (!data.length) {
+      dispatch(userListThunk(memoizedNext8elements));
+    }
+  }, [data.length, dispatch, memoizedNext8elements]);
 
   return (
     <>
